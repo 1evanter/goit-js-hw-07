@@ -23,23 +23,7 @@ function createGallery (galleryItems) {
     }).join('')
 }
 
-galleryList.addEventListener('click', handleModalOpen);
-
-function handleModalOpen(evt) {
-    evt.preventDefault();
-
-    if (evt.nodename !== 'IMG') {
-        return;
-    }
-
-    createSimpleLightbox(evt);
-}
-
-createSimpleLightbox();
-
-function createSimpleLightbox() {
     const lightbox = new SimpleLightbox('.gallery a', {
         captionsData: "alt",
         captionDelay: 250,
     });
-}
