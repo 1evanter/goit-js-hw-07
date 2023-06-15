@@ -36,18 +36,23 @@ function handleModalOpen(evt) {
   createLightbox(evt);
 }
 
-function createLightbox(evt) {
-  const modalImg = evt.target.dataset.source;
-  
-    const instance = basicLightbox.create(`
-    <img src="${modalImg}" width="800" height="600">
-`);
+function handleKeyPress(instance) {
+  window.addEventListener('keydown', function eventHandler(e) {
+    if (e.code === "Escape") {
+      instance.close();
+      window.removeEventListener('keydown', eventHandler)
+    }
+  });
+  }
 
-  instance.show();
+  function createLightbox(evt) {
 
-      window.addEventListener('keydown', (evt) => {
-        if (evt.code === 'Escape') {
-            instance.close();
-        };
-    }, { once: true });
-}
+    const modalImg = evt.target.dataset.source;
+    const instance = basicLightbox.create(
+        `<img src="${modalImg}" width="800" height="600">`
+    );
+
+    instance.show();
+
+    handleKeyPress(instance);
+  }
